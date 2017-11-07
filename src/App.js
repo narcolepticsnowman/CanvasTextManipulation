@@ -13,7 +13,8 @@ class App extends Component {
             red: 0,
             green: 0,
             blue: 0,
-            alpha: 255
+            alpha: 255,
+            textPixels: []
         };
     }
     
@@ -22,51 +23,34 @@ class App extends Component {
         this.canvas = document.getElementById('canvas');
 
         let resize = ()=>{
-            this.canvas.width = window.innerWidth*.8;
-            this.canvas.height = window.innerHeight*.8;
-            this.createText(this.state.text);
+            this.setState({textPixels: []}, ()=>{
+                this.canvas.width = window.innerWidth*.8;
+                this.canvas.height = window.innerHeight*.8;
+                this.createText(this.state.text);
+            });
         };
         window.addEventListener('resize', resize);
 
         this.setState({text: "IyIyIyIyIy"}, resize);
     }
 
-    handleInput(event){
-        this.setState({text: event.target.value}, ()=>{
-            this.createText.bind(this)(this.state.text);
-        })
+    handleChange(prop){
+        return (event)=>{
+            let newState = {};
+            newState[prop] = event.target.value;
+            this.setState(newState, this.createText.bind(this))
+        }
     }
-    handleRed(event){
-        this.setState({red: event.target.value}, ()=>{
-            this.createText.bind(this)(this.state.text);
-        })
-    }
-    handleGreen(event){
-        this.setState({green: event.target.value}, ()=>{
-            this.createText.bind(this)(this.state.text);
-        })
-    }
-    handleBlue(event){
-        this.setState({blue: event.target.value}, ()=>{
-            this.createText.bind(this)(this.state.text);
-        })
-    }
-    handleAlpha(event){
-        this.setState({alpha: event.target.value}, ()=>{
-            this.createText.bind(this)(this.state.text);
-        })
-    }
-
 
     render() {
         return (
             <div className="App">
                 <div>
-                    <input type="text" id="inputText" value={this.state.text} onChange={this.handleInput.bind(this)} />
-                    <input type="number" id="red" value={this.state.red} onChange={this.handleRed.bind(this)} />
-                    <input type="number" id="green" value={this.state.green} onChange={this.handleGreen.bind(this)} />
-                    <input type="number" id="blue" value={this.state.blue} onChange={this.handleBlue.bind(this)} />
-                    <input type="number" id="alpha" value={this.state.alpha} onChange={this.handleAlpha.bind(this)} />
+                    <input type="text" id="inputText" value={this.state.text} onChange={this.handleChange("text")} />
+                    <input type="number" id="red" value={this.state.red} onChange={this.handleChange("red")} />
+                    <input type="number" id="green" value={this.state.green} onChange={this.handleChange("green")} />
+                    <input type="number" id="blue" value={this.state.blue} onChange={this.handleChange("blue")} />
+                    <input type="number" id="alpha" value={this.state.alpha} onChange={this.handleChange("alpha")} />
                 </div>
                 <canvas id="canvas"/>
             </div>
@@ -108,9 +92,7 @@ class App extends Component {
         let c = Math.floor(a/Math.sin(0.644026494));
         let b = Math.floor(Math.sqrt(c*c - a*a));
 
-        let fontSize = c;
-        console.log("text height: "+b);
-        ctx.font =  fontSize + "px 'Courier'";
+        ctx.font =  c + "px 'Courier'";
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
@@ -118,9 +100,7 @@ class App extends Component {
         let textData = ctx.measureText(this.state.text);
         if(!textData.width || textData.width<1) return;
         let textTopLeftCornerY = Math.floor(this.canvas.height/2)-b;
-        //imageData.data
         let imageData  = ctx.getImageData(0, textTopLeftCornerY, this.canvas.width, b*2);
-        // let imageData  = ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
         this.textPixels = this.getTextPixels(imageData);
         let img =ctx.createImageData(imageData);
 
@@ -140,6 +120,9 @@ class App extends Component {
     }
 
     getTextPixels(imageData) {
+        if(this.state.textPixels.length>0){
+            return this.state.textPixels;
+        }
         let textPixels = [];
         let y=0;
         for (let i = 0; i < imageData.data.length; i += 4) {
@@ -148,10 +131,10 @@ class App extends Component {
                 textPixels[y] = [];
             }
             if (imageData.data[i + 3] > 0) {
-
                 textPixels[y][Math.floor((i/4 - y*imageData.width))] = imageData.data.slice(i, i+4);
             }
         }
+        this.setState({textPixels: textPixels});
         return textPixels;
     }
 
