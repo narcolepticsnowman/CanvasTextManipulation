@@ -18,8 +18,8 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-926">
-              <caret line="69" column="12" lean-forward="false" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+            <state relative-caret-position="72">
+              <caret line="102" column="82" lean-forward="true" selection-start-line="102" selection-start-column="82" selection-end-line="102" selection-end-column="82" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -347,7 +347,7 @@
       <workItem from="1508475628632" duration="597000" />
       <workItem from="1508988429459" duration="53000" />
       <workItem from="1509909717195" duration="630000" />
-      <workItem from="1509946282829" duration="5035000" />
+      <workItem from="1509946282829" duration="5594000" />
     </task>
     <task id="LOCAL-00001" summary="improve performance by only getting the pixels of all the text once per resize">
       <created>1510032645729</created>
@@ -356,11 +356,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510032645729</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="improve performance by only storing pixels that we care about">
+      <created>1510184932665</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1510184932665</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55640000" />
+    <option name="totallyTimeSpent" value="56199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -404,7 +411,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="improve performance by only getting the pixels of all the text once per resize" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve performance by only getting the pixels of all the text once per resize" />
+    <MESSAGE value="improve performance by only storing pixels that we care about" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve performance by only storing pixels that we care about" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -743,8 +751,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-926">
-          <caret line="69" column="12" lean-forward="false" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+        <state relative-caret-position="72">
+          <caret line="102" column="82" lean-forward="true" selection-start-line="102" selection-start-column="82" selection-end-line="102" selection-end-column="82" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

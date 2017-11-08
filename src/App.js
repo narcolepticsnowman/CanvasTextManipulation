@@ -106,13 +106,11 @@ class App extends Component {
 
 
 
-        console.log(this.textPixels);
         for(let y in this.textPixels){
             for(let x in this.textPixels[y]){
                 this.setPixel(img, parseInt(x), parseInt(y));
             }
         }
-        console.log(this.getTextPixels(img));
         ctx.putImageData(img, 0, textTopLeftCornerY);
 
     }
