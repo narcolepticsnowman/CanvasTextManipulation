@@ -104,14 +104,12 @@ class App extends Component {
         this.textPixels = this.getTextPixels(imageData);
         let img =ctx.createImageData(imageData);
 
+
+
         console.log(this.textPixels);
-        for(let y=0; y<this.textPixels.length; y++){
-            if(this.textPixels[y]){
-                for(let x=0; x<this.textPixels[y].length; x++){
-                    if(this.textPixels[y][x]){
-                        this.setPixel(img, x,y);
-                    }
-                }
+        for(let y in this.textPixels){
+            for(let x in this.textPixels[y]){
+                this.setPixel(img, parseInt(x), parseInt(y));
             }
         }
         console.log(this.getTextPixels(img));
@@ -128,9 +126,11 @@ class App extends Component {
         for (let i = 0; i < imageData.data.length; i += 4) {
             if (i>0 && (i / 4) % imageData.width === 0) {
                 y++;
-                textPixels[y] = [];
             }
             if (imageData.data[i + 3] > 0) {
+                if(!textPixels[y]){
+                    textPixels[y]=[];
+                }
                 textPixels[y][Math.floor((i/4 - y*imageData.width))] = imageData.data.slice(i, i+4);
             }
         }
